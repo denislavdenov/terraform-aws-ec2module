@@ -31,6 +31,6 @@ resource "aws_instance" "example" {
 
   connection {
     user        = "ubuntu"
-    private_key = "id_rsa"
+    private_key = "${file("id_rsa")}"
   }
 }
