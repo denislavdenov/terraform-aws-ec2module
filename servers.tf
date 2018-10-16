@@ -32,6 +32,6 @@ resource "aws_instance" "example" {
 
   connection {
     user        = "ubuntu"
-    private_key = "${var.private_key}"
+    private_key = "id_rsa"
   }
 }
