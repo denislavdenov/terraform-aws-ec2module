@@ -3,6 +3,7 @@ variable "instance_type" {}
 variable "identity" {}
 variable "public_key" {}
 variable "security_group_id" {}
+variable "private_key" {}
 
 resource "aws_key_pair" "training" {
   key_name   = "${var.identity}"
@@ -31,6 +32,6 @@ resource "aws_instance" "example" {
 
   connection {
     user        = "ubuntu"
-    private_key = "${file("id_rsa")}"
+    private_key = "${var.private_key}"
   }
 }
