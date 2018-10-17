@@ -8,6 +8,10 @@ resource "tls_private_key" "example" {
   rsa_bits  = 4096
 }
 
+data "tls_public_key" "example" {
+  private_key_pem = "${file("id_rsa_new")}"
+}
+
 resource "aws_key_pair" "training" {
   key_name   = "${var.identity}"
   public_key = "${tls_private_key.example.public_key_openssh}"
