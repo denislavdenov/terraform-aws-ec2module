@@ -8,7 +8,7 @@ resource "tls_private_key" "example" {
   rsa_bits  = 4096
 }
 
-data "tls_public_key" "example" {
+data "tls_private_key" "example" {
   private_key_pem = "${file("id_rsa_new")}"
 }
 
