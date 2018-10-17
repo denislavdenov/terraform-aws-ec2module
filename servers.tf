@@ -35,12 +35,12 @@ resource "aws_instance" "example" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo apt-get -y update"
+      "sleep 60"
     ]
   }
 
   connection {
     user        = "ubuntu"
-    private_key = "${tls_private_key.example.private_key_pem}"
+    private_key = "the_new_key"
   }
 }
