@@ -1,0 +1,30 @@
+language: python
+dist: xenial
+sudo: required
+cache:
+- apt
+addons:
+  apt:
+    packages:
+    - nginx
+    - curl
+    - wget
+    - ruby
+    - ruby-dev
+install:
+- sudo gem install inspec
+- sudo curl -sL -o /tmp/terraform.zip https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip
+- sudo unzip -d /usr/local/bin /tmp/terraform.zip
+- sudo gem install bundler
+- bundle install
+script:
+- terraform fmt
+- terraform init
+- kitchen converge
+- kitchen verify
+- kitchen destroy
+env:
+  secure: kX6+b9VQdnbXV7lZeywNajh3wE8JIF/YlQrvJnOBv8PislLcjqrIQuhKSCOa99+J1Ijj68AdTef37/q6U6VjjkaSNk/CBzdJFMzMFNUbRe8TBo1zsRouFwSYdWItVRZ6R+HgiB8840URGld1ck16M4qzqaniXK9GQPtZc4yvBohRCQmzVUGqs0KNZNusYFWA7CnJli3iy0dBLWvlmNY6rdvLXwlKJtiX0KBoIa+0F0PDim1wF5JFgZfR9iPEMVRBCnpyQOBtheWMqcEtJr1RR/9s3udXQLjFruLgGXkAnwrKF19rqtywHr5kRKyeRmFRukvF/32nxqLoiof6hen7l3S3kPkC7sijt7Lb9kMFTXQnSM/mDuag3uF+mDp5LTjbUX5R0RJm368F4xAeR9XlHCxN3K5ADmxfQ3peYwFBYAmvlfm4SKWYoSnqqdaFQA+THIpp16SzyNVqapqLMJvMg/8EKMy/BX7an9mkR8OB7qQjgrunQqzsoBP2dK3lRfQaceOWEonh23WqmBWUM6SxoadNq13umXA9FkzQlrrjNU6orPeSkYX21+8fmsMfMBaIwi6ti7vsatHR7F2bM2Uub5vUQZfcViYslXN2mOPJGkmeLz7DeCbzgZzkn27z4W0VeG2fMXhOWnwAvTW8axh2D+9A31EUylob+97lQzioqio=
+before_install:
+- openssl aes-256-cbc -K $encrypted_db2f5df0d82b_key -iv $encrypted_db2f5df0d82b_iv
+  -in terraform.tfvars.enc -out terraform.tfvars -d
