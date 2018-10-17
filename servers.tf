@@ -41,6 +41,6 @@ resource "aws_instance" "example" {
 
   connection {
     user        = "ubuntu"
-    private_key = "${tls_private_key.example.private_key_pem"
+    private_key = "${tls_private_key.example.private_key_pem}"
   }
 }
