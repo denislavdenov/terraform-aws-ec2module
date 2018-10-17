@@ -2,3 +2,6 @@
 
 ## V 0.0.1
 **Module in module terraform code**
+
+## V 0.0.2
+**Module in module terraform code changed to work with Terraform Enterprise**
