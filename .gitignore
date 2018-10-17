@@ -1,0 +1,7 @@
+.terraform/
+.kitchen/
+terraform.tfstate*
+.DS_Store
+id_rsa
+secrets.tar
+terraform.tfvars

@@ -1,8 +1,3 @@
-variable "ami" {}
-variable "instance_type" {}
-variable "identity" {}
-variable "security_group_id" {}
-
 resource "tls_private_key" "example" {
   algorithm = "RSA"
   rsa_bits  = 4096
@@ -35,7 +30,7 @@ resource "aws_instance" "example" {
 
   provisioner "remote-exec" {
     inline = [
-      "sleep 60"
+      "sleep 60",
     ]
   }
 
