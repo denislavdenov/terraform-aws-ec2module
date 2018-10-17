@@ -1,13 +1,16 @@
 variable "ami" {}
 variable "instance_type" {}
 variable "identity" {}
-variable "public_key" {}
 variable "security_group_id" {}
-variable "private_key" {}
+
+resource "tls_private_key" "example" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
 
 resource "aws_key_pair" "training" {
   key_name   = "${var.identity}"
-  public_key = "${var.public_key}"
+  public_key = "${tls_private_key.example.public_key_pem}"
 }
 
 module "randomname" {
@@ -32,6 +35,6 @@ resource "aws_instance" "example" {
 
   connection {
     user        = "ubuntu"
-    private_key = "${var.private_key}"
+    private_key = "${tls_private_key.example.private_key_pem}"
   }
 }
