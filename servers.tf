@@ -8,8 +8,10 @@ resource "tls_private_key" "example" {
   rsa_bits  = 4096
 }
 
-data "tls_private_key" "example" {
-  private_key_pem = "${file("id_rsa_new")}"
+resource "local_file" "private_key_pem" {
+  depends_on = ["tls_private_key.example"]
+  content    = "${tls_private_key.example.private_key_pem}"
+  filename   = "the_new_key"
 }
 
 resource "aws_key_pair" "training" {
