@@ -10,7 +10,7 @@ resource "tls_private_key" "example" {
 
 resource "aws_key_pair" "training" {
   key_name   = "${var.identity}"
-  public_key = "${tls_private_key.example.public_key_pem}"
+  public_key = "${tls_private_key.example.public_key_openssh}"
 }
 
 module "randomname" {
